@@ -1,0 +1,40 @@
+-- null-ls stuff -- should move to LSP file
+--[[ https://github.com/VonHeikemen/lsp-zero.nvim/blob/main/advance-usage.md#intergrate-with-null-ls ]]
+local null_ls = require("null-ls")
+local hover = null_ls.builtins.hover
+local code_actions = null_ls.builtins.code_actions
+local formatting = null_ls.builtins.formatting
+local completion = null_ls.builtins.completion
+local diagnostics = null_ls.builtins.diagnostics
+
+local sources = {
+  hover.dictionary,
+  code_actions.eslint_d,
+  completion.spell,
+  formatting.black,
+  code_actions.proselint,
+  diagnostics.write_good,
+  code_actions.shellcheck,
+  diagnostics.shellcheck,
+  formatting.shfmt,
+  diagnostics.ruff,
+  formatting.deno_fmt,
+  formatting.deno_fmt.with({
+    filetypes = {"markdown"},
+  })
+}
+
+require("null-ls").setup({
+  sources = sources
+})
+
+
+
+--[[ code_actions.refactoring, ]]
+--[[ diagnostics.vale, ]]
+--[[ diagnostics.markdownlint, ]]
+--[[ hover.dictionary, ]]
+--[[ code_actions.ltrs, ]]
+--[[ diagnostics.ltrs.with({ ]]
+--[[ extra_args = { "-l", "en-GB"}, ]]
+--[[ extra_filetypes = { "rmd" }, ]]
