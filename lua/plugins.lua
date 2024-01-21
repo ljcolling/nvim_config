@@ -303,7 +303,6 @@ require("lazy").setup({
   --    lazy = false
   --  },
 
-  --[[ "lukas-reineke/indent-blankline.nvim", ]]
 
   { import = "plugins.neotree" },
 
@@ -383,9 +382,6 @@ require("lazy").setup({
             scope_incremental = "grc",
             node_decremental = "grm",
           },
-        },
-        context_commentstring = {
-          enable = true,
         },
         indent = {
           enable = true,

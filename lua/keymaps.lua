@@ -179,3 +179,9 @@ keymap_wk(
 "/",
 ":lua require('Comment.api').toggle.blockwise(vim.fn.visualmode())<cr>",
 "Commment toggle linewise (visual)")
+
+
+-- [m]arks
+keymap("n","<leader>m", "<cmd>Telescope marks<cr>", "Marks")
+keymap_wk("n", "ma", "<cmd>MarksListAll<cr>","List all marks")
+

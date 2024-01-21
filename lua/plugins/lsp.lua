@@ -325,7 +325,7 @@ return {
         hover.dictionary,
         completion.spell,
         formatting.black,
-        code_actions.proselint,
+        --[[ code_actions.proselint, ]]
         diagnostics.write_good,
         code_actions.shellcheck,
         diagnostics.shellcheck,

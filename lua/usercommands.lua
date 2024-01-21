@@ -82,7 +82,9 @@ vim.api.nvim_create_user_command("Count", function()
 	local e = vim.api.nvim_buf_get_mark(0, ">")
 	local current = vim.api.nvim_buf_get_lines(0, s[1] - 1, e[1], false)
 	local str = table.concat(current, "")
-	print(#str)
+  local cmd = "echo '" .. str .. "' | word-count"
+	local words = os.execute(cmd)
+  print(words)
 end, { range = "%", nargs = "*", addr = "lines" })
 
 --[[
@@ -377,7 +379,8 @@ vim.api.nvim_create_user_command("Test", function()
 	--[[ local col_num = 0 ]]
 end, {})
 
-vim.api.nvim_create_user_command("Build", function()
+vim.api.nvim_create_user_command("Build", function(opts)
+  local new = opts.args == "new"
 	if new then
 		vim.b.build_command = nil
 	end
@@ -399,10 +402,10 @@ vim.api.nvim_create_user_command("Build", function()
 		on_stderr = sayok,
 	})
 end, {
-	--[[ nargs = 1, ]]
-	--[[ complete = function(ArgLead, CmdLind, CursorPos) ]]
-	--[[   return { 'file', 'project' } ]]
-	--[[ end ]]
+	nargs = "?",
+	complete = function(ArgLead, CmdLind, CursorPos)
+	  return { 'new' }
+	end
 })
 
 vim.api.nvim_create_user_command("ClearMarks", function()
