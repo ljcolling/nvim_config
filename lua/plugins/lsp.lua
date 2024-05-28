@@ -26,7 +26,8 @@ return {
     -- Snippets
     { "L3MON4D3/LuaSnip" },
     { "rafamadriz/friendly-snippets" },
-    { "simrat39/rust-tools.nvim" },
+    -- { "simrat39/rust-tools.nvim" },
+    { "mrcjkb/rustaceanvim", ft={'rust'}},
     { "SmiteshP/nvim-navbuddy" },
     { "SmiteshP/nvim-navic" },
     { "MunifTanjim/nui.nvim" },
@@ -35,6 +36,29 @@ return {
 
   },
   config = function()
+
+
+    vim.g.rustaceanvim = {
+      inlay_hints = {
+        highlight = "NonText",
+      },
+      tools = {
+        hover_actions = {
+          auto_focus = true,
+        },
+      },
+      server = {
+        on_attach = function(client, bufnr)
+          require("lsp-inlayhints").on_attach(client, bufnr)
+        end
+      }
+    }
+
+
+
+
+
+
     local lsp = require("lsp-zero")
     lsp.preset("recommended")
 
@@ -327,7 +351,7 @@ return {
         formatting.black,
         --[[ code_actions.proselint, ]]
         diagnostics.write_good,
-        code_actions.shellcheck,
+        -- code_actions.shellcheck,
         diagnostics.shellcheck,
         formatting.shfmt,
         --[[ diagnostics.ruff, ]]
@@ -348,7 +372,7 @@ return {
 
     -- Initialise rust_analyzer with rust-tools.nvim
     local rust_lsp = lsp.build_options("rust_analyzer", {})
-    require("rust-tools").setup({ server = rust_lsp })
+    -- require("rust-tools").setup({ server = rust_lsp })
 
     vim.diagnostic.config({
       virtual_text = true,
@@ -365,7 +389,7 @@ return {
     }
   })
   ]]
-    local rt = require("rust-tools")
-    rt.setup()
+    --[[ local rt = require("rust-tools")
+    rt.setup() ]]
   end,
 }

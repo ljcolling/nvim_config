@@ -1,5 +1,6 @@
 -- install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+print(lazypath)
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -15,8 +16,14 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 
 require("lazy").setup({
-
-
+  {
+  'stevearc/overseer.nvim',
+  opts = {},
+    config = function()
+      require('overseer').setup()
+    end
+},
+  {"SeniorMars/typst.nvim"},
   {
     "ray-x/go.nvim",
     dependencies = { -- optional packages

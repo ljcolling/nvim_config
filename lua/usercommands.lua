@@ -81,10 +81,13 @@ vim.api.nvim_create_user_command("Count", function()
 	local s = vim.api.nvim_buf_get_mark(0, "<")
 	local e = vim.api.nvim_buf_get_mark(0, ">")
 	local current = vim.api.nvim_buf_get_lines(0, s[1] - 1, e[1], false)
+
 	local str = table.concat(current, "")
+
+
   local cmd = "echo '" .. str .. "' | word-count"
-	local words = os.execute(cmd)
-  print(words)
+	local words, ok, exit_code = os.execute(cmd)
+  -- print(exit_code)
 end, { range = "%", nargs = "*", addr = "lines" })
 
 --[[
