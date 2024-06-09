@@ -58,7 +58,6 @@ return {
 
 
 
-
     local lsp = require("lsp-zero")
     lsp.preset("recommended")
 
@@ -74,6 +73,7 @@ return {
       "r_language_server",
       "pyright",
       --[[ "pylyzer", ]]
+      "pyre",
       "bashls",
       "gopls",
       "jsonls",
@@ -90,7 +90,7 @@ return {
 
     -- Skip rust-analyzer because it's managed by rust-tools.nvim
     lsp.skip_server_setup({ "rust_analyzer" })
-    lsp.skip_server_setup({ "tsserver" })
+    -- lsp.skip_server_setup({ "tsserver" })
 
     local cmp = require("cmp")
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -213,6 +213,21 @@ return {
     })
     require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
+--[[ require("lspconfig").pylyzer.setup{
+    default_config = {
+        name = "pylyzer",
+        cmd = {
+            "pylyzer",
+            "--server"
+        },
+        filetypes = {
+            "python"
+        },
+        root_dir = { ".venv"}
+    }
+} ]]
+
+
     -- setup up inlay hints for typescript
     require('lspconfig').tsserver.setup({
       settings = {
@@ -277,6 +292,9 @@ return {
         }
       }
     }
+
+    require('lspconfig').pyre.setup({})
+
 
     --     require("grammar-guard").init()
     --     local nvim_lsp = require("lspconfig")
@@ -349,11 +367,13 @@ return {
         hover.dictionary,
         completion.spell,
         formatting.black,
+        -- diagnostics.pyre,
         --[[ code_actions.proselint, ]]
         diagnostics.write_good,
         -- code_actions.shellcheck,
         diagnostics.shellcheck,
         formatting.shfmt,
+        code_actions.eslint_d
         --[[ diagnostics.ruff, ]]
         --[[ formatting.deno_fmt, ]]
         --[[ formatting.deno_fmt.with({

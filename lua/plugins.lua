@@ -111,7 +111,11 @@ require("lazy").setup({
     end
   },
   -- Debugging
-  { "mfussenegger/nvim-dap" },
+  { "mfussenegger/nvim-dap",
+    dependencies ={
+    "nvim-neotest/nvim-nio"
+  }
+  },
   { "mfussenegger/nvim-dap-python" },
   { "jay-babu/mason-nvim-dap.nvim" },
 
@@ -369,8 +373,8 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "markdown", "lua", "rust", "r", "go", "javascript", "bash" },
-        sync_install = false,
+        -- ensure_installed = { "markdown", "lua", "rust", "r", "go", "javascript", "bash" },
+        sync_install = true,
         auto_install = true,
         highlight = {
           enable = true,
